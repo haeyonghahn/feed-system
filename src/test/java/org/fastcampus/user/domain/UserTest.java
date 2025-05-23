@@ -1,10 +1,8 @@
-package org.fastcampus.user;
+package org.fastcampus.user.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.fastcampus.user.domain.User;
-import org.fastcampus.user.domain.UserInfo;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
