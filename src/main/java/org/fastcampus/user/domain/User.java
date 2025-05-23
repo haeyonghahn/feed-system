@@ -1,13 +1,14 @@
 package org.fastcampus.user.domain;
 
 import java.util.Objects;
+import org.fastcampus.common.PositiveIntegerCounter;
 
 public class User {
 
     private final Long id;
     private final UserInfo userInfo;
-    private final UserRelationCount followingCount;
-    private final UserRelationCount followerCount;
+    private final PositiveIntegerCounter followingCount;
+    private final PositiveIntegerCounter followerCount;
 
     public User(Long id, UserInfo userInfo) {
         if (userInfo == null) {
@@ -16,8 +17,8 @@ public class User {
 
         this.id = id;
         this.userInfo = userInfo;
-        this.followingCount = new UserRelationCount();
-        this.followerCount = new UserRelationCount();
+        this.followingCount = new PositiveIntegerCounter();
+        this.followerCount = new PositiveIntegerCounter();
     }
 
     public void follow(User followee) {
@@ -25,7 +26,7 @@ public class User {
             throw new IllegalArgumentException("Cannot follow yourself");
         }
 
-        followingCount.increaseCount();
+        followingCount.increase();
         followee.increaseFollowerCount();
     }
 
@@ -34,16 +35,16 @@ public class User {
             throw new IllegalArgumentException("Cannot unfollow yourself");
         }
 
-        followingCount.decreaseCount();
+        followingCount.decrease();
         followee.decreaseFollowerCount();
     }
 
     private void increaseFollowerCount() {
-        followerCount.increaseCount();
+        followerCount.increase();
     }
 
     private void decreaseFollowerCount() {
-        followerCount.decreaseCount();
+        followerCount.decrease();
     }
 
     public int getFollowingCount() {

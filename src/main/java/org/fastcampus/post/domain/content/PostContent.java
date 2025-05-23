@@ -10,7 +10,7 @@ public class PostContent extends Content {
     }
 
     @Override
-    protected void checkText(String contentText) {
+    protected void checkLength(String contentText) {
         if (contentText == null || contentText.isEmpty()) {
             throw new IllegalArgumentException("Post content cannot be null or empty");
         }
