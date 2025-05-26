@@ -1,7 +1,7 @@
 package org.fastcampus.user.domain;
 
 import java.util.Objects;
-import org.fastcampus.common.PositiveIntegerCounter;
+import org.fastcampus.common.domain.PositiveIntegerCounter;
 
 public class User {
 

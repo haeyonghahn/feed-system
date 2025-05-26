@@ -2,6 +2,7 @@ package org.fastcampus.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.junit.jupiter.api.Test;
 
 class PositiveIntegerCounterTest {

@@ -1,4 +1,4 @@
-package org.fastcampus.common;
+package org.fastcampus.common.domain;
 
 public class PositiveIntegerCounter {
 
