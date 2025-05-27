@@ -1,11 +1,14 @@
 package org.fastcampus.post.domain;
 
 import java.util.Objects;
+import lombok.Builder;
+import lombok.Getter;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.post.domain.content.PostContent;
 import org.fastcampus.user.domain.User;
 
+@Getter
 public class Post {
 
     private final Long id;
@@ -14,6 +17,7 @@ public class Post {
     private PostPublicationState state;
     private final PositiveIntegerCounter likeCount;
 
+    @Builder
     public Post(Long id, User author, Content content, PostPublicationState state, PositiveIntegerCounter likeCount) {
         if (author == null) {
             throw new IllegalArgumentException("Author cannot be null");
@@ -59,24 +63,12 @@ public class Post {
         this.state = state;
     }
 
-    public PostPublicationState getState() {
-        return state;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public Content getContent() {
-        return content;
-    }
-
     public int getLikeCount() {
         return likeCount.getCount();
+    }
+
+    public String getContentText() {
+        return content.getContentText();
     }
 
     @Override

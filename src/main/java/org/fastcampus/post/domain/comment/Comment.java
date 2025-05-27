@@ -1,21 +1,25 @@
 package org.fastcampus.post.domain.comment;
 
 import java.util.Objects;
+import lombok.Builder;
+import lombok.Getter;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.CommentContent;
 import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.user.domain.User;
 
+@Getter
 public class Comment {
 
     private final Long id;
     private final Post post;
     private final User author;
     private final Content content;
-    private final PositiveIntegerCounter positiveIntegerCounter;
+    private final PositiveIntegerCounter likeCounter;
 
-    public Comment(Long id, Post post, User author, Content content, PositiveIntegerCounter positiveIntegerCounter) {
+    @Builder
+    public Comment(Long id, Post post, User author, Content content, PositiveIntegerCounter likeCounter) {
         if (post == null) {
             throw new IllegalArgumentException("post should not be null");
         }
@@ -30,7 +34,7 @@ public class Comment {
         this.post = post;
         this.author = author;
         this.content = content;
-        this.positiveIntegerCounter = positiveIntegerCounter;
+        this.likeCounter = likeCounter;
     }
 
     public Comment(Long id, Post post, User author, Content content) {
@@ -52,31 +56,19 @@ public class Comment {
         if (author.equals(user)) {
             throw new IllegalArgumentException("author cannot like own comment");
         }
-        positiveIntegerCounter.increase();
+        likeCounter.increase();
     }
 
     public void unlike() {
-        positiveIntegerCounter.decrease();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public Content getContent() {
-        return content;
+        likeCounter.decrease();
     }
 
     public int getLikeCount() {
-        return positiveIntegerCounter.getCount();
+        return likeCounter.getCount();
+    }
+
+    public String getContentText() {
+        return content.getContentText();
     }
 
     @Override

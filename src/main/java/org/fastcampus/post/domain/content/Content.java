@@ -1,5 +1,8 @@
 package org.fastcampus.post.domain.content;
 
+import lombok.Getter;
+
+@Getter
 public abstract class Content {
 
     String contentText;
@@ -18,10 +21,6 @@ public abstract class Content {
     }
 
     protected abstract void checkLength(String contentText);
-
-    public String getContentText() {
-        return contentText;
-    }
 
     public boolean isEdited() {
         return datetimeInfo.isEdited();
