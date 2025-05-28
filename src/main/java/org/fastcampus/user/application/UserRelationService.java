@@ -22,7 +22,6 @@ public class UserRelationService {
         }
 
         user.follow(targetUser);
-
         userRelationRepository.save(user, targetUser);
     }
 
@@ -35,7 +34,6 @@ public class UserRelationService {
         }
 
         user.unfollow(targetUser);
-
         userRelationRepository.delete(user, targetUser);
     }
 }

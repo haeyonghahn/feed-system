@@ -1,5 +1,6 @@
 package org.fastcampus.post.application;
 
+import lombok.RequiredArgsConstructor;
 import org.fastcampus.post.application.dto.CreateCommentRequestDto;
 import org.fastcampus.post.application.dto.LikeRequestDto;
 import org.fastcampus.post.application.dto.UpdateCommentRequestDto;
@@ -9,23 +10,16 @@ import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.comment.Comment;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class CommentService {
 
     private final UserService userService;
     private final PostService postService;
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
-
-    public CommentService(UserService userService,
-        PostService postService,
-        CommentRepository commentRepository,
-        LikeRepository likeRepository) {
-        this.userService = userService;
-        this.postService = postService;
-        this.commentRepository = commentRepository;
-        this.likeRepository = likeRepository;
-    }
 
     public Comment getComment(Long id) {
         return commentRepository.findById(id);

@@ -1,5 +1,6 @@
 package org.fastcampus.post.application;
 
+import lombok.RequiredArgsConstructor;
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
 import org.fastcampus.post.application.dto.LikeRequestDto;
 import org.fastcampus.post.application.dto.UpdatePostRequestDto;
@@ -8,21 +9,15 @@ import org.fastcampus.post.application.interfaces.PostRepository;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class PostService {
 
     private final UserService userService;
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
-
-    public PostService(
-        UserService userService,
-        PostRepository postRepository,
-        LikeRepository likeRepository) {
-        this.userService = userService;
-        this.postRepository = postRepository;
-        this.likeRepository = likeRepository;
-    }
 
     public Post getPost(Long id) {
         return postRepository.findById(id);

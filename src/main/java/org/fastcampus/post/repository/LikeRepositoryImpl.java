@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.fastcampus.post.application.interfaces.LikeRepository;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.comment.Comment;
+import org.fastcampus.post.repository.entity.comment.CommentEntity;
 import org.fastcampus.post.repository.entity.like.LikeEntity;
 import org.fastcampus.post.repository.entity.post.PostEntity;
 import org.fastcampus.post.repository.jpa.JpaCommentRepository;
@@ -41,18 +42,27 @@ public class LikeRepositoryImpl implements LikeRepository {
         jpaPostRepository.save(new PostEntity(post));
     }
 
+    @Transactional
     @Override
     public void like(Comment comment, User user) {
-
+        LikeEntity entity = new LikeEntity(comment, user);
+        jpaLikeRepository.save(entity);
+        jpaCommentRepository.save(new CommentEntity(comment));
     }
 
+    @Transactional
     @Override
     public void unlike(Post post, User user) {
-
+        LikeEntity entity = new LikeEntity(post, user);
+        jpaLikeRepository.deleteById(entity.getId());
+        jpaPostRepository.save(new PostEntity(post));
     }
 
+    @Transactional
     @Override
     public void unlike(Comment comment, User user) {
-
+        LikeEntity entity = new LikeEntity(comment, user);
+        jpaLikeRepository.deleteById(entity.getId());
+        jpaCommentRepository.save(new CommentEntity(comment));
     }
 }
