@@ -26,4 +26,9 @@ public class FakePostRepository implements PostRepository {
         store.put(id, newPost);
         return newPost;
     }
+
+    @Override
+    public Post publish(Post post) {
+        return save(post);
+    }
 }
